@@ -60,3 +60,13 @@ func GetLogger() *logrus.Logger {
 func LoggerWriter() io.Writer {
 	return GetLogger().Writer()
 }
+
+func Errlog(err error) error {
+	if err == nil {
+		return nil
+	}
+
+	Errorf("%s", err.Error())
+
+	return err
+}

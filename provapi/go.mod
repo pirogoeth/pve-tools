@@ -5,6 +5,8 @@ go 1.20
 require (
 	github.com/Telmate/proxmox-api-go v0.0.0-20230524203107-41e6ffadedb1
 	github.com/gin-gonic/gin v1.6.3
+	github.com/mattn/go-sqlite3 v1.14.17
+	github.com/pirogoeth/pve-tools/pkg v0.0.0-20230604160659-554b05fba836
 	tailscale.com v1.42.0
 )
 
@@ -58,6 +60,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pierrec/lz4/v4 v4.1.17 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
+	github.com/sirupsen/logrus v1.9.2 // indirect
 	github.com/tailscale/certstore v0.1.1-0.20220316223106-78d6e1c49d8d // indirect
 	github.com/tailscale/golang-x-crypto v0.0.0-20221115211329-17a3db2c30d2 // indirect
 	github.com/tailscale/goupnp v1.0.1-0.20210804011211-c64d0f06ea05 // indirect
@@ -88,4 +91,5 @@ require (
 	gvisor.dev/gvisor v0.0.0-20230504175454-7b0a1988a28f // indirect
 	inet.af/peercred v0.0.0-20210906144145-0893ea02156a // indirect
 	nhooyr.io/websocket v1.8.7 // indirect
+	sigs.k8s.io/yaml v1.3.0 // indirect
 )

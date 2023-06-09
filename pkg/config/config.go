@@ -61,7 +61,7 @@ func loadConfigFromFile[T any](underlay *T) (*T, error) {
 		return nil, err
 	}
 
-	err = yaml.Unmarshal(buf.Bytes(), &underlay)
+	err = yaml.Unmarshal(buf.Bytes(), &underlay, yaml.DisallowUnknownFields)
 	if err != nil {
 		return nil, err
 	}

@@ -2,6 +2,7 @@ package clients
 
 import (
 	"context"
+	"crypto/tls"
 	"fmt"
 
 	"github.com/Telmate/proxmox-api-go/proxmox"
@@ -36,7 +37,13 @@ func Init(ctx context.Context, cfg *apiCfg.Config) error {
 
 func initProxmox(cfg *apiCfg.Config) (*proxmox.Client, error) {
 	pmCfg := cfg.Proxmox
-	pmClient, err := proxmox.NewClient(pmCfg.ApiUrl, nil, "", nil, "", pmCfg.TaskTimeoutSeconds)
+
+	var tlsCfg *tls.Config = nil
+	if pmCfg.TlsInsecure {
+		tlsCfg = &tls.Config{InsecureSkipVerify: true}
+	}
+
+	pmClient, err := proxmox.NewClient(pmCfg.ApiUrl, nil, "", tlsCfg, "", pmCfg.TaskTimeoutSeconds)
 	if err != nil {
 		return nil, err
 	}

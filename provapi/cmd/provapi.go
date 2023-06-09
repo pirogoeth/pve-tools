@@ -13,6 +13,8 @@ import (
 	"github.com/pirogoeth/pve-tools/provapi/api"
 	"github.com/pirogoeth/pve-tools/provapi/clients"
 	apiCfg "github.com/pirogoeth/pve-tools/provapi/config"
+	"github.com/pirogoeth/pve-tools/provapi/database"
+	"github.com/pirogoeth/pve-tools/provapi/model"
 )
 
 func main() {
@@ -27,6 +29,8 @@ func main() {
 		logging.Fatalf("Failed to load config: %s", err)
 	}
 
+	logging.Tracef("Config loaded: %#v", cfg)
+
 	// Create a Gin engine
 	engine := gin.New()
 	engine.Use(gin.LoggerWithWriter(logging.LoggerWriter()))
@@ -34,6 +38,12 @@ func main() {
 
 	if err := clients.Init(ctx, cfg); err != nil {
 		logging.Fatalf("Failed to initialize clients: %s", err)
+	}
+	if err := database.Init(ctx, cfg); err != nil {
+		logging.Fatalf("Failed to initialize database: %s", err)
+	}
+	if err := model.Init(ctx, database.Database()); err != nil {
+		logging.Fatalf("Failed to initialize models: %s", err)
 	}
 	if err := api.Init(ctx, cfg, engine); err != nil {
 		logging.Fatalf("Failed to initialize API: %s", err)
